@@ -33,7 +33,7 @@ export default async function RootLayout({ children }) {
         <AuthProvider>
           <NextUIProvider>
             <NavbarComponent />
-            <main>{children}</main>
+            <main className="pt-4">{children}</main>
           </NextUIProvider>
         </AuthProvider>
       </body>

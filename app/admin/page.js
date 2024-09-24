@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { Card, CardBody } from "@nextui-org/react";
 import { redirect } from "next/navigation";
+import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -11,12 +11,12 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="dashboard-content grid grid-cols-3 gap-4">
-      <div className="col-span-2 slot-1 mb-4">
+    <div className="dashboard-content grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="col-span-1 md:col-span-2 slot-1 mb-4">
         <Card>
           <CardBody>
-            <h3>Welcome to Your Dashboard</h3>
-            <p>Here you can view your latest statistics and updates.</p>
+            <h3 className="text-lg font-semibold">Welcome to Your Dashboard</h3>
+            <p className="text-sm">Here you can view your latest statistics and updates.</p>
           </CardBody>
         </Card>
       </div>
@@ -24,16 +24,16 @@ export default async function DashboardPage() {
         <div className="slot-2 mb-4">
           <Card>
             <CardBody>
-              <h3>Recent Activity</h3>
-              <p>You have 3 new notifications and 2 pending tasks.</p>
+              <h3 className="text-lg font-semibold">Newest tickets</h3>
+              <p className="text-sm">You have 3 new notifications and 2 pending tasks.</p>
             </CardBody>
           </Card>
         </div>
         <div className="slot-3">
           <Card>
             <CardBody>
-              <h3>Quick Links</h3>
-              <p>Access your profile, settings, and help center here.</p>
+              <h3 className="text-lg font-semibold">Quick Links</h3>
+              <p className="text-sm">Access your profile, settings, and help center here.</p>
             </CardBody>
           </Card>
         </div>
@@ -41,4 +41,3 @@ export default async function DashboardPage() {
     </div>
   );
 }
-

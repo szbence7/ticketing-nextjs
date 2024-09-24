@@ -23,7 +23,7 @@ const NavbarComponent = async () => {
         </NavbarItem>
         <NavbarItem>
           {session && (
-            <Link href="/dashboard">Dashboard</Link>
+            <Link href="/admin">Admin</Link>
           )}
         </NavbarItem>
       </NavbarContent>
