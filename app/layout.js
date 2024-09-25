@@ -2,7 +2,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { getServerSession } from "next-auth/next";
 import { NextUIProvider } from "@nextui-org/react";
-import NavbarComponent from "../components/NavbarComponent";
 import AuthProvider from "./context/Authprovider";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 
@@ -32,8 +31,7 @@ export default async function RootLayout({ children }) {
       >
         <AuthProvider>
           <NextUIProvider>
-            <NavbarComponent />
-            <main className="pt-4">{children}</main>
+            <main>{children}</main>
           </NextUIProvider>
         </AuthProvider>
       </body>
