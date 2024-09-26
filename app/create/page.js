@@ -47,9 +47,9 @@ export default function CreateForm() {
   };
 
   return (
-    <>
-      <h1 className="text-2xl font-bold mb-6 text-center">Submit a ticket</h1>
-      <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-xl shadow-md">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-md p-6 bg-white rounded-xl shadow-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">Submit a ticket</h1>
         <div className="mb-8">
           <div className="flex justify-between items-center">
             {[1, 2, 3].map((s) => (
@@ -178,6 +178,6 @@ export default function CreateForm() {
           )}
         </form>
       </div>
-    </>
+    </div>
   );
 }

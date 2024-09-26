@@ -1,10 +1,11 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Link from "next/link";
-import { Button, Card, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardFooter, Image } from "@nextui-org/react";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Button from '@mui/material/Button';
 
 export default async function HomePage() {
-  const session = await getServerSession(authOptions);
 
   return (
     <div className="text-center">
@@ -12,8 +13,10 @@ export default async function HomePage() {
       <Card className="py-8 px-4 max-w-[1024px] mx-auto mb-6">
         <h2 className="text-xl font-semibold mb-4">Tickets</h2>
         <div className="space-x-4">
-          <Button color="primary" as={Link} href="/create">Submit Ticket</Button>
-          <Button color="primary" variant="ghost">Track Ticket Status</Button>
+        <Button color="primary" variant="contained" component={Link} href="/create" sx={{ mr: 4 }} startIcon={<AddCircleIcon />}>
+                  Create Ticket
+                </Button>
+          <Button color="primary" variant="outlined">Track Ticket Status</Button>
         </div>
       </Card>
       <Card className="py-8 px-4 max-w-[1024px] mx-auto">

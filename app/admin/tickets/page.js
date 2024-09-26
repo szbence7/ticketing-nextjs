@@ -27,7 +27,11 @@ export default function TicketListing() {
             {user.email}
           </User>
         );
-      case "role":
+      case "dateAdded":
+        return cellValue;
+      case "dateModified":
+        return cellValue;
+      case "category":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{cellValue}</p>

@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Input, Button, Select, SelectItem, Textarea } from "@nextui-org/react";
+import { Input, Button, Select, SelectItem, Textarea, Divider, Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 
 export default function CreateForm() {
-  const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
@@ -38,42 +37,15 @@ export default function CreateForm() {
     });
   };
 
-  const nextStep = () => {
-    setStep(step + 1);
-  };
-
-  const prevStep = () => {
-    setStep(step - 1);
-  };
-
   return (
     <>
-      <h1 className="text-2xl font-bold mb-6 text-center">Submit a ticket for the customers</h1>
-      <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-xl shadow-md">
-        <div className="mb-8">
-          <div className="flex justify-between items-center">
-            {[1, 2, 3].map((s) => (
-              <div key={s} className="flex flex-col items-center">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${s === step ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'}`}>
-                  {s}
-                </div>
-                <div className={`mt-2 text-sm ${s === step ? 'text-blue-500 font-semibold' : 'text-gray-500'}`}>
-                  Step {s}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 h-2 bg-gray-200 rounded-full">
-            <div 
-              className="h-full bg-blue-500 rounded-full transition-all duration-300 ease-in-out"
-              style={{ width: `${((step - 1) / 2) * 100}%` }}
-            ></div>
-          </div>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {step === 1 && (
-            <div className="space-y-4">
+      <Card className="max-w-md mx-auto mt-8 p-8 bg-white rounded-xl shadow-md" style={{ minWidth: '60%' }}>
+        <CardHeader>
+          <p className="text-md font-semibold mb-4">Customer details</p>
+        </CardHeader>
+        <CardBody>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex space-x-4 px-8">
               <Input
                 label="Name"
                 value={name}
@@ -89,95 +61,78 @@ export default function CreateForm() {
                 isRequired
                 className="w-full"
               />
-              <Input
-                label="Company Name"
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                className="w-full"
-              />
-              <Button onClick={nextStep} color="primary" className="w-full mt-4">
-                Next
-              </Button>
             </div>
-          )}
-
-          {step === 2 && (
-            <div className="space-y-4">
-              <Select
-                label="Category"
-                placeholder="Select a category"
-                selectedKeys={category}
-                onSelectionChange={setCategory}
-                className="w-full"
-                isRequired
-              >
-                {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>
-                    {cat}
-                  </SelectItem>
-                ))}
-              </Select>
-              <Textarea
-                label="Issue"
-                value={issue}
-                onChange={(e) => setIssue(e.target.value)}
-                isRequired
-                className="w-full"
-              />
-              <Select
-                label="Tags"
-                placeholder="Select tags"
-                selectionMode="multiple"
-                selectedKeys={tags}
-                onSelectionChange={setTags}
-                className="w-full"
-              >
-                {tagOptions.map((tag) => (
-                  <SelectItem key={tag} value={tag}>
-                    {tag}
-                  </SelectItem>
-                ))}
-              </Select>
-              <Select
-                label="Priority"
-                placeholder="Select priority"
-                selectedKeys={priority}
-                onSelectionChange={setPriority}
-                className="w-full"
-                isRequired
-              >
-                {priorityOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value} className={`bg-${option.color}-100`}>
-                    {option.value}
-                  </SelectItem>
-                ))}
-              </Select>
-              <div className="flex justify-between mt-4">
-                <Button onClick={prevStep} color="secondary" className="w-1/2 mr-2">
-                  Previous
-                </Button>
-                <Button onClick={nextStep} color="primary" className="w-1/2 ml-2">
-                  Next
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {step === 3 && (
-            <div className="space-y-4">
-              <p className="text-center text-gray-600">Step 3 is empty for now.</p>
-              <div className="flex justify-between mt-4">
-                <Button onClick={prevStep} color="secondary" className="w-1/2 mr-2">
-                  Previous
-                </Button>
-                <Button type="submit" color="primary" className="w-1/2 ml-2">
-                  Submit
-                </Button>
-              </div>
-            </div>
-          )}
-        </form>
-      </div>
+            <Input
+              label="Company Name"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              className="w-full px-8"
+            />
+            <Divider />
+            <p className="text-md font-semibold mb-4">Ticket details</p>
+          
+            <Input
+              label="Subject"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              isRequired
+              className="w-full px-8"
+            />
+            <Select
+              label="Category"
+              placeholder="Select a category"
+              selectedKeys={category}
+              onSelectionChange={setCategory}
+              className="w-full px-8"
+              isRequired
+            >
+              {categories.map((cat) => (
+                <SelectItem key={cat} value={cat}>
+                  {cat}
+                </SelectItem>
+              ))}
+            </Select>
+            <Textarea
+              label="Issue"
+              value={issue}
+              onChange={(e) => setIssue(e.target.value)}
+              isRequired
+              className="w-full px-8"
+            />
+            <Select
+              label="Tags"
+              placeholder="Select tags"
+              selectionMode="multiple"
+              selectedKeys={tags}
+              onSelectionChange={setTags}
+              className="w-full px-8"
+            >
+              {tagOptions.map((tag) => (
+                <SelectItem key={tag} value={tag}>
+                  {tag}
+                </SelectItem>
+              ))}
+            </Select>
+            <Select
+              label="Priority"
+              placeholder="Select priority"
+              selectedKeys={priority}
+              onSelectionChange={setPriority}
+              className="w-full px-8"
+              isRequired
+            >
+              {priorityOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value} className={`bg-${option.color}-100`}>
+                  {option.value}
+                </SelectItem>
+              ))}
+            </Select>
+            <Button type="submit" color="primary" className="w-full mt-4">
+              Submit Ticket
+            </Button>
+          </form>
+        </CardBody>
+      </Card>
     </>
   );
 }
